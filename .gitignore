@@ -1,0 +1,8 @@
+firmware/main/certs/*
+!firmware/main/certs/aws-root-ca.pem
+firmware/build
+firmware/sdkconfig
+firmware/sdkconfig.old
+
+hardware/*bak
+hardware/hardware-rescue.lib

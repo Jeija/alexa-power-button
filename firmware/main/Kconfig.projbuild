@@ -1,0 +1,41 @@
+menu "Alexa Power Button"
+
+config WIFI_SSID
+    string "WiFi SSID"
+    default "myssid"
+    help
+        SSID (network name) to connect to.
+
+config WIFI_PASSWORD
+    string "WiFi Password"
+    default "mypassord"
+    help
+        WiFi password (WPA or WPA2) to use.
+
+        Can be left blank if the network has no security set.
+
+config AWS_CLIENT_ID
+    string "AWS IoT Client ID"
+    default "power-button-1"
+    help
+        AWS IoT Client ID for the example. Should be unique for every device.
+
+config AWS_TOPIC_BASE
+    string "AWS MQTT base topic"
+    default "home/myroom/mycomputer"
+    help
+        MQTT topic levels to be prepended before "power" and "reset".
+
+        E.g. home/myroom/mycomputer creates home/myroom/mycomputer/power
+        and home/myroom/mycomputer/reset.
+
+config DASH_BUTTON_MAC
+    string "Dash Button MAC Address"
+    default "b4:7c:9c:c5:20:f9"
+    help
+        MAC Address to Amazon Dash Button that can be used as on-switch.
+
+        The ESP32 listens for WiFi traffic with the dash button as source or destination address
+        and triggers the power switch if the dash button is detected.
+
+endmenu

@@ -1,0 +1,2 @@
+# Enable AWS IoT SDK support
+CONFIG_AWS_IOT_SDK=y
