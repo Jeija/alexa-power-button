@@ -10,6 +10,7 @@
 #include <freertos/event_groups.h>
 #include <esp_event_loop.h>
 #include <esp_system.h>
+#include <nvs_flash.h>
 #include <esp_wifi.h>
 #include <esp_log.h>
 #include <lwip/sockets.h>
@@ -55,7 +56,7 @@
  * any further occurences of the dash button's MAC address after the first occurence for
  * DASH_UNBLOCK_TIMEOUT milliseconds.
  */
-#define DASH_UNBLOCK_TIMEOUT 4000
+#define DASH_UNBLOCK_TIMEOUT 10000
 
 static const char *TAG = "alexa-power-button";
 
@@ -314,6 +315,8 @@ static void dashButtonSniffer(void* buf, wifi_promiscuous_pkt_type_t type) {
 }
 
 static void wifi_init() {
+	nvs_flash_init();
+
 	/*
 	 * Standard WiFi connection setup
 	 */
