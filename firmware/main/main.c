@@ -15,6 +15,7 @@
 #include <esp_log.h>
 #include <lwip/sockets.h>
 #include <lwip/dns.h>
+#include <driver/gpio.h>
 
 #include <aws_iot_mqtt_client_interface.h>
 #include <aws_iot_version.h>
@@ -194,7 +195,11 @@ static void mqtt_task(void *param) {
 	mqttInitParams.pRootCALocation = (const char *)aws_root_ca_pem_start;
 	mqttInitParams.pDeviceCertLocation = (const char *)certificate_pem_crt_start;
 	mqttInitParams.pDevicePrivateKeyLocation = (const char *)private_pem_key_start;
+	mqttInitParams.mqttCommandTimeout_ms = 20000;
+	mqttInitParams.tlsHandshakeTimeout_ms = 5000;
+	mqttInitParams.isSSLHostnameVerify = true;
 	mqttInitParams.disconnectHandler = onMQTTDisconnect;
+	mqttInitParams.disconnectHandlerData = NULL;
 
 	AWS_IoT_Client client;
 	rc = aws_iot_mqtt_init(&client, &mqttInitParams);
