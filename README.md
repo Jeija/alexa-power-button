@@ -10,7 +10,7 @@ The KiCad design files (schematic, PCB layout) are provided in `hardware`.
 * Use the Amazon App to configure the dash button
 * In the last step, don't select which of the products in the list to order
 * Press the dash button and use wireshark or similar tools to get the button's MAC address
-* In the `firmware` directory: Execute `make menuconfig` and enter the Dash Button's MAC Address in `Alexa Power Button --> Dash Button MAC Address` (including colons)
+* In the `firmware` directory: Execute `idf.py menuconfig` and enter the Dash Button's MAC Address in `Alexa Power Button --> Dash Button MAC Address` (including colons)
 
 After flashing the firmware, the ESP32 will capture all WiFi traffic and check if source or destination address of the IEEE 802.11 header match the provided Dash Button MAC address.
 
@@ -20,12 +20,12 @@ After flashing the firmware, the ESP32 will capture all WiFi traffic and check i
 * Upload the Lambda function. If you have the AWS CLI set up, you can use the Makefile provided in `aws` to upload and test the code.
 * Add `THING_ENDPOINT` (AWS IoT HTTPS REST API endpoint host, see the thing's Interact page in AWS IoT) and `MQTT_BASE_TOPIC` (prefix for MQTT topic, e.g. `myhome/mypc`) as environment variables for the Lambda function
 * Get your device private key and device certificate from AWS IoT and copy them to `firmware/main/certs` as `private.pem.key` and `certificate.pem.crt` respectively. See [esp-idf's AWS IoT documentation](https://github.com/espressif/esp-idf/tree/master/examples/protocols/aws_iot) for details.
-* Confgiure the firmware: Run `make menuconfig` in `firmware` and add your WiFi SSID and password in `Alexa Power Button`. Configure your (arbitrary but unique) AWS IoT Client ID and add the same MQTT base topic as specified in your Lambda function environment variable. Under `Component Config --> Amazon Web Services IoT Platform`, add your AWS IoT HTTPS REST API endpoint host, see the thing's Interact page on AWS IoT.
+* Confgiure the firmware: Run `idf.py menuconfig` in `firmware` and add your WiFi SSID and password in `Alexa Power Button`. Configure your (arbitrary but unique) AWS IoT Client ID and add the same MQTT base topic as specified in your Lambda function environment variable. Under `Component Config --> Amazon Web Services IoT Platform`, add your AWS IoT HTTPS REST API endpoint host, see the thing's Interact page on AWS IoT.
 * Flash the firmware. If errors occur while connecting to AWS IoT, see [the documentation in esp-idf](https://github.com/espressif/esp-idf/tree/master/examples/protocols/aws_iot) for some common problems.
 
 ## Flash the firmware
-* Use `make menuconfig` in `firmware` to configure your python executable, serial port and flasher baud rate
-* `alexa-power-button` uses the usual esp-idf Makefile and workflow. Run `make flash` in `firmware` in order to compile and flash the firmware to your ESP32 board.
+* Use `idf.py menuconfig` in `firmware` to configure your python executable, serial port and flasher baud rate
+* `alexa-power-button` uses the usual esp-idf CMake build system and workflow. Run `idf.py all` and `idf.py flash` in `firmware` in order to compile and flash the firmware to your ESP32 board.
 
 ## Attribution
 * ESP32 schematic symbol and footprint: [adamjvr's ESP32-kiCAD-Footprints
