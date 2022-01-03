@@ -3,6 +3,8 @@ firmware/main/certs/*
 firmware/build
 firmware/sdkconfig
 firmware/sdkconfig.old
+firmware/dependencies.lock
+firmware/managed_components
 
 hardware/*bak
 hardware/hardware-rescue.lib
